@@ -1,0 +1,8 @@
+Kollégiumi befizetési kötelezettség kiírása, vesztesz 20 pénzt!;20;1
+G*jdos könyv átvétele, vesztesz 15 pénzt!;15;1
+iMSc ösztöndíj tétel rögzítése, kapsz 40 pénzt!;40;0
+Tizenharmadik havi nyugdíj,kapsz 30 pénzt!;30;0
+Meghívtad a többi játékost egy sörre, mindenki más kap 15 pénzt!;15;3
+Befogadtad a többi játékost a koliba, mindenki más kap 10 pénzt!;10;3
+Korepetáltad a pórnépet adatbázisokból, mindenki ad neked 10 pénzt!;10;2
+Nyertél egy fogadást, mindenki más ad neked 15 pénzt!;15;2

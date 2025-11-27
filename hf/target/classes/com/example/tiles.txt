@@ -1,0 +1,28 @@
+Start;0;0;0;0;#ffffff;0;0
+Old Kent Road;60;50;2;0;#bd7e66;1;1
+Community Chest;0;0;0;0;#999999;0;0
+Whitechapel Road;60;50;4;0;#bd7e66;1;1
+Kings Cross Station;200;0;25;0;#e32929;1;1
+Chance;0;0;0;0;#999999;0;0
+The Angel Islington;100;50;6;0;#e32929;1;1
+Jail;0;0;0;0;#999999;0;0
+Euston Road;100;50;6;0;#e32929;1;1
+Pentonville Road;120;50;8;0;#7345a8;1;1
+Community Chest;0;0;0;0;#999999;0;0
+Pall Mall;140;100;10;0;#7345a8;1;1
+Electric Company;150;0;4;0;#7345a8;1;1
+Whitehall;140;100;10;0;#48b028;1;1
+Free Parking;0;0;0;0;#999999;0;0
+Northumberland;160;100;12;0;#48b028;1;1
+Marylebone Station;200;0;25;0;#48b028;1;1
+Bow Street;180;100;14;0;#28a7b0;1;1
+Marlborough Street;180;100;14;0;#28a7b0;1;1
+Vine Street;200;100;16;0;#28a7b0;1;1
+Strand;220;150;18;0;#eded0e;1;1
+Go To Jail;0;0;0;0;#999999;0;0
+Fleet Street;220;150;18;0;#eded0e;1;1
+Chance;0;0;0;0;#999999;0;0
+Trafalgar Square;240;150;20;0;#eded0e;1;1
+Water Works;150;0;4;0;#2b0ee6;1;1
+Chance;0;0;0;0;#999999;0;0
+Piccadilly;280;150;24;0;#2b0ee6;1;1
