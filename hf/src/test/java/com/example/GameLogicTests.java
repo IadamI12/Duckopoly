@@ -24,13 +24,13 @@ public class GameLogicTests {
         // Initialize tiles
         tiles = new ArrayList<>();
         tiles.add(new Tile("a", 0, 0, 0, 0, "#ffffff", 0, 0));
-        tiles.add(new Tile("b", 60, 50, 2, 0, "#bd7e66", 1, 1));
+        tiles.add(new Tile("b", 60, 50, 2, 0, "#676767", 1, 1));
         tiles.add(new Tile("c", 0, 0, 0, 0, "#999999", 0, 0));
-        tiles.add(new Tile("d", 60, 50, 4, 0, "#bd7e66", 1, 1));
+        tiles.add(new Tile("d", 60, 50, 4, 0, "#eeeeee", 1, 1));
 
         // Initialize bonus tiles
         bonusTiles = new ArrayList<>();
-        bonusTiles.add(new Bonus("You won a prize!", 50, 0));
+        bonusTiles.add(new Bonus("hihi", 50, 0));
 
         // Initialize dice
         dice = new ArrayList<>();

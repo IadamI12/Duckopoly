@@ -20,47 +20,52 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-
-public class TradeWindow implements ActionListener{
-private Player currentPlayer;
-private Tile tile;
-private Board board;
-private JFrame frame;
+//A class handling the trading
+public class TradeWindow implements ActionListener {
+    private Player currentPlayer;
+    private Tile tile;
+    private Board board;
+    private JFrame frame;
     private JTextField area;
     private JButton confirmButton;
-    public TradeWindow(Board board,Player currentPlayer,Tile tile){
-    this.board = board;
-    this.currentPlayer = currentPlayer;
-    this.tile = tile;
-     frame = new JFrame("Trade Window");
-     frame.setLayout(new BorderLayout());
-    frame.setSize(400, 300);
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setVisible(true);
-    frame.setResizable(false);
-    frame.setLocationRelativeTo(board);
-    ImageIcon icon = new ImageIcon("hf/src/main/java/com/example/villager.png");
-    frame.setIconImage(icon.getImage());
-     JPanel leftPanel = new JPanel();
-     leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
-     JTextArea tileInfo = new JTextArea();
+    // Creating the trade window, storing the data needed
+    public TradeWindow(Board board, Player currentPlayer, Tile tile) {
+        this.board = board;
+        this.currentPlayer = currentPlayer;
+        this.tile = tile;
 
-     JPanel tileColorJPanel = new JPanel();
-     tileColorJPanel.setBackground(tile.getTileColor());
-     tileColorJPanel.setPreferredSize(new Dimension(50,150));
+        // Creating the trade window
+        frame = new JFrame("Trade Window");
+        frame.setLayout(new BorderLayout());
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setResizable(false);
+        // Setting the location to the middle of the board
+        frame.setLocationRelativeTo(board);
+        ImageIcon icon = new ImageIcon("hf/src/main/java/com/example/villager.png");
+        frame.setIconImage(icon.getImage());
+        // Creating the left panel and filling it with the tile info
+        JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+
+        JTextArea tileInfo = new JTextArea();
+        // Creating the panel that shows the tile's color
+        JPanel tileColorJPanel = new JPanel();
+        tileColorJPanel.setBackground(tile.getTileColor());
+        tileColorJPanel.setPreferredSize(new Dimension(50, 150));
         leftPanel.add(tileColorJPanel);
 
-         String info = String.format(
-        "Name: %s%nPrice: %d%nHouse cost: %d%nTax: %d%nHouses: %d%nOwner: %s%nSell value: %d",
-        tile.getName(),
-        tile.getPrice(),
-        tile.getHouseCost(),
-        tile.getTax(),
-        tile.getNumberOfHouses(),
-        tile.getOwner().getName(),
-        tile.getSellValue()
-    );
+        String info = String.format(
+                "Name: %s%nPrice: %d%nHouse cost: %d%nTax: %d%nHouses: %d%nOwner: %s%nSell value: %d",
+                tile.getName(),
+                tile.getPrice(),
+                tile.getHouseCost(),
+                tile.getTax(),
+                tile.getNumberOfHouses(),
+                tile.getOwner().getName(),
+                tile.getSellValue());
         tileInfo.setEditable(false);
         tileInfo.setLineWrap(true);
         tileInfo.setWrapStyleWord(true);
@@ -69,21 +74,24 @@ private JFrame frame;
         tileInfo.setText(info);
 
         leftPanel.add(tileInfo);
-
         frame.add(leftPanel, BorderLayout.WEST);
-    JPanel rightPanel = new JPanel();
-    rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-    JLabel amount = new JLabel("Enter offer amount:");
-    amount.setFont(new Font("Times New Roman", Font.BOLD, 16));
-    amount.setAlignmentX(Component.CENTER_ALIGNMENT);
-    rightPanel.add(Box.createRigidArea(new Dimension(0, 75)));
-    rightPanel.add(amount);
-    rightPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-    area = new JTextField();
-    area.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-    area.setMaximumSize(new Dimension(100, 30));
 
-area. getDocument().addDocumentListener(new DocumentListener() {
+        // Creating the right panel and filling it with the offer area and confirm
+        // button
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        JLabel amount = new JLabel("Enter offer amount:");
+        amount.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        amount.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rightPanel.add(Box.createRigidArea(new Dimension(0, 75)));
+        rightPanel.add(amount);
+        rightPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        area = new JTextField();
+        area.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        area.setMaximumSize(new Dimension(100, 30));
+        // Adding a document listener to the offer amount text field, so it updates even
+        // if the user pastes something in the field
+        area.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 checkConfirmButton();
@@ -100,49 +108,55 @@ area. getDocument().addDocumentListener(new DocumentListener() {
             }
         });
 
-
-
-    rightPanel.add(area);
-    rightPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-    confirmButton = new JButton("Confirm Trade");
-    confirmButton.setEnabled(false);
-    confirmButton.addActionListener(this);
-    confirmButton.setFont(new Font("Times New Roman", Font.BOLD, 16));
-    rightPanel.add(confirmButton);
-    area.setAlignmentX(Component.CENTER_ALIGNMENT);
-    confirmButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-    rightPanel.setBackground(new Color(149, 248, 244));
-    frame.add(rightPanel, BorderLayout.CENTER);
-           
-    }
-private void checkConfirmButton(){
-    try{
-    if (area.getText().isEmpty() || currentPlayer.getMoney() < Integer.parseInt(area.getText())){
+        rightPanel.add(area);
+        rightPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        confirmButton = new JButton("Confirm Trade");
         confirmButton.setEnabled(false);
-    }    
-    else{
-        confirmButton.setEnabled(true);
-    }}catch (NumberFormatException e){
-        confirmButton.setEnabled(false);
+        confirmButton.addActionListener(this);
+        confirmButton.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        rightPanel.add(confirmButton);
+        area.setAlignmentX(Component.CENTER_ALIGNMENT);
+        confirmButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rightPanel.setBackground(new Color(149, 248, 244));
+        frame.add(rightPanel, BorderLayout.CENTER);
+
     }
+
+    // Check if the confirm button should be enabled
+    private void checkConfirmButton() {
+        try {
+            // disabling the button if the input is invalid
+            if (area.getText().isEmpty() || currentPlayer.getMoney() < Integer.parseInt(area.getText())) {
+                confirmButton.setEnabled(false);
+            } else {
+                confirmButton.setEnabled(true);
+            }
+        } catch (NumberFormatException e) {
+            confirmButton.setEnabled(false);
+        }
     }
+
     @Override
+    // Handling the confirm button being pressed
     public void actionPerformed(ActionEvent e) {
-       
-        if (e.getSource() == confirmButton){
+
+        if (e.getSource() == confirmButton) {
             int offer = Integer.parseInt(area.getText());
             Player owner = tile.getOwner();
+            // Transferring the money and the tile
             currentPlayer.setMoney(currentPlayer.getMoney() - offer);
             owner.setMoney(owner.getMoney() + offer);
             tile.setOwner(currentPlayer);
             currentPlayer.setTiles(tile);
             owner.getTiles().remove(tile);
+            // Refreshing the board to show the changes
             board.refreshHouseCount(tile);
             int tileIndex = board.getTiles().indexOf(tile);
-            board.highlightTileBorder(board.getTileButtons().get(tileIndex),currentPlayer.getPieceColor(),true);
+            board.highlightTileBorder(board.getTileButtons().get(tileIndex), currentPlayer.getPieceColor(), true);
             board.refreshPlayerPanels(board.getPlayers());
+            // Closing the trade window
             frame.dispose();
         }
     }
-    
+
 }

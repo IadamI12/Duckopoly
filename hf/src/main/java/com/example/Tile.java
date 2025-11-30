@@ -16,7 +16,7 @@ public class Tile implements Serializable{
     private boolean purchasable;
     private boolean housePurchasable;
     private int sell;
-
+    //A class responsible for storing the tiles
     private List<Player> playersOnTile;
     public Tile(String name,int price,int houseCost, int tax, int numberOfHouses,String color,int purchasable, int housePurchasable){
         this.name = name;
@@ -24,6 +24,7 @@ public class Tile implements Serializable{
         this.houseCost = houseCost;
         this.tax = tax;
         this.numberOfHouses = numberOfHouses;
+        //the owner being set to a basic one
         this.owner = new Player(100, "-", 0, 0, null,false, Color.BLACK,false);
         color = color.substring(1);
         int rgb = Integer.parseInt(color,16);

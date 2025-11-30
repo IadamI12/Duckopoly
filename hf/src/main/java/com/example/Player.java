@@ -4,7 +4,7 @@ import java.util.List;
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
-
+//A class to store the players of the game
 public class Player implements Serializable{
     private int id;
     private String name;
@@ -74,6 +74,3 @@ public class Player implements Serializable{
         this.lost = lost;
     }
 }
-/*Players tábla kéne és akkor azokbol egy new-t létrehozni? meg a main elejen new Players és akkor onnan tudjuk majd betölteni.
- * VAGY CSAK SIMÁN WINDOW?
- */

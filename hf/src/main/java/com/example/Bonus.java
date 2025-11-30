@@ -5,6 +5,7 @@ public class Bonus implements Serializable{
     private String bonus;
     private int money;
     private int profitType;
+    //Setting up the bonusTiles, whats the line shown on the screen, whats the amount and who gets it
     public Bonus(String bonus, int money, int profitType){
         this.bonus = bonus;
         this.money = money;
