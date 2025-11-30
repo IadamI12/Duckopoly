@@ -14,20 +14,22 @@ public class Main {
         static boolean thrown;
 
     public static void main(String[] args){
-        setup();
+        if (!setup()){
+            return;
+        }
         GameLogic game = new GameLogic(players,tiles,bonusTiles,dice,boardSize,currentPlayer,turn);
         Board board = new Board(players,tiles);    
         GameController controller = new GameController(game,board,thrown);
         controller.startGame();
     }
-    public static void setup(){
+    public static boolean setup(){
         Setup st = new Setup();
         int[] savedState = null;
         try {
             savedState = st.load(players, tiles, bonusTiles);
         } catch (EndGame e) {
             System.out.println(e.getMessage());
-            return;
+            return false;
         }
         int savedThrown = 0;
         if (savedState != null){
@@ -48,5 +50,6 @@ public class Main {
      if (savedState != null) {
         thrown = savedThrown == 1;     
     }
+        return true;
 }
 }

@@ -127,7 +127,7 @@ System.out.println("Looking for save file at: " + f.getAbsolutePath());
 
 
     private void loadTiles(List<Tile> tiles, String filename) throws IOException{
-        BufferedReader br = new BufferedReader(new FileReader(filename)); 
+        BufferedReader br = new BufferedReader(new FileReader(filename));
             while (true){
                 String line1 = br.readLine();
                 if (line1 == null) break;
