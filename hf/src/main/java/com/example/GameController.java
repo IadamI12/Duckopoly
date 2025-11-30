@@ -245,9 +245,7 @@ private void handleTradeButton(){
 
 public void startGame(){
     board.setThrown(thrown);
-    for (Tile tile : gameLogic.getTiles()) {
-     board.repaintAllTiles();
-    }
+    board.repaintAllTiles();
     for (JButton button : board.getTileButtons()) {
         Player owner = gameLogic.getTiles().get(board.getTileButtons().indexOf(button)).getOwner();
         board.highlightTileBorder(button, owner.getPieceColor(), (owner.getId() != 100) ? true : false);
@@ -261,12 +259,13 @@ public void startGame(){
             }
 }
 public void movePlayer(int numberOfTiles){
-    gameLogic.movePlayer(numberOfTiles);
+    String message = gameLogic.movePlayer(numberOfTiles);
+    if (message != null) {
+        board.showMessage(message);
+    }
     board.refreshPlayerPanels(gameLogic.getPlayers());
-    for (Tile tile : gameLogic.getTiles()) {
      //board.repaintTile(tile);
      board.repaintAllTiles();
-    }
     try{
     updateButtonStates();
     }catch (PlayerWon pw) {

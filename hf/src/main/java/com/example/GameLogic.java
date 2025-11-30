@@ -68,7 +68,8 @@ public class GameLogic {
         return temp;
     }
 
-    public void movePlayer(int numberOfTiles) {
+    public String movePlayer(int numberOfTiles) {
+        String whatToWriteOut = null;
         Tile jailTile = tiles.get(7);
         int oldPosition = currentPlayer.getPosition();
         Tile oldTile = tiles.get(currentPlayer.getPosition());
@@ -84,7 +85,8 @@ public class GameLogic {
             jailTile.addPlayer(currentPlayer);
             currentPlayer.setJailed(true);
             currentPlayer.setJailTime(0);
-            JOptionPane.showMessageDialog(null, "You went to jail!");
+            whatToWriteOut = "You went to jail!";
+           // JOptionPane.showMessageDialog(null, "You went to jail!");
         }
         if (oldPosition > newPosition) {
             currentPlayer.setMoney(currentPlayer.getMoney() + 200);
@@ -93,7 +95,8 @@ public class GameLogic {
             if (bonusTiles.size() > 0) {
                 int randIndex = random.nextInt(bonusTiles.size());
                 Bonus bonusCard = bonusTiles.get(randIndex);
-                JOptionPane.showMessageDialog(null, bonusCard.getBonus());
+                //JOptionPane.showMessageDialog(null, bonusCard.getBonus());
+                whatToWriteOut = bonusCard.getBonus();
                 switch (bonusCard.getProfitType()) {
                     // kapsz pénzt
                     case 0:
@@ -132,7 +135,7 @@ public class GameLogic {
             p.setMoney(p.getMoney() + newTile.getTax());
         }
         }
-
+        return whatToWriteOut;
     }
 public Player determineWinner() {
     Player winner = null;
