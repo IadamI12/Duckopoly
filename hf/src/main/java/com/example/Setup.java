@@ -30,8 +30,8 @@ try{
 }
 
 
-        String[] responses = {"Új játék létrehozása","Régi játék betöltése","Mégsem"};
-        JLabel message = new JLabel("A játék kezdete");
+        String[] responses = {"New game","Load old game","Cancel"};
+        JLabel message = new JLabel("Choose an option to start:");
         message.setFont(new Font("Times New Roman",Font.BOLD,22));
         ImageIcon icon = new ImageIcon("hf\\src\\main\\java\\com\\example\\duck.png");
         int response = JOptionPane.showOptionDialog(null, message, "Duckopoly", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon, responses, 0);
