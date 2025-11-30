@@ -1,9 +1,6 @@
 package com.example;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Bonus implements Serializable{
     private String bonus;
     private int money;

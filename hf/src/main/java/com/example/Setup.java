@@ -47,13 +47,13 @@ try{
             return loadFromFile(players,tiles,bonusTiles);
 
             }  catch (IOException e) {
-        e.printStackTrace();  // Print full stack trace to console
+        e.printStackTrace();
         throw new EndGame("Failed to load game (IO): " + e.getClass().getName());
     } catch (ClassNotFoundException er) {
-        er.printStackTrace();  // Print full stack trace to console
+        er.printStackTrace();
         throw new EndGame("Failed to load game (Class): " + er.getClass().getName());
     } catch (Exception ex) {
-        ex.printStackTrace();  // Catch any other exception
+        ex.printStackTrace();
         throw new EndGame("Failed to load game: " + ex.getClass().getName() + " - " + ex.getMessage());
     }
 
