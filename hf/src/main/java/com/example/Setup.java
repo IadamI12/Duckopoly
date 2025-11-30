@@ -99,7 +99,7 @@ try{
            if (name == null || name.length() <= 0){
             throw new EndGame("Game start has been cancelled.");
            }
-           Player newPlayer = new Player(i, name.trim(), 300,0, null,false, playerColors.get(i),false);
+           Player newPlayer = new Player(i, name.trim(), 200,0, null,false, playerColors.get(i),false);
            players.add(newPlayer);
         }
     }

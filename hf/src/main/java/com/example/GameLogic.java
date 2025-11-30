@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class GameLogic {
-    private Board board;
-
     private List<Player> players = new ArrayList<>();
     private List<Tile> tiles = new ArrayList<>();
     private List<Bonus> bonusTiles = new ArrayList<>();
@@ -23,42 +21,43 @@ public class GameLogic {
     private int boardSize;
     private int turn = 0;
     private Player currentPlayer;
+    public GameLogic(List<Player> players, List<Tile> tiles, List<Bonus> bonusTiles, List<Dice> dice, int boardSize, Player currentPlayer, int turn){
+        this.players = players;
+        this.tiles = tiles;
+        this.bonusTiles = bonusTiles;
+        this.dice = dice;
+        this.boardSize = boardSize;
+        this.currentPlayer = currentPlayer;
+        this.turn = turn;
 
-    public void startGame() {
-        Setup st = new Setup();
-        int[] savedState = null;
-        try {
-            savedState = st.load(players, tiles, bonusTiles);
-        } catch (EndGame e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        int savedThrown = 0;
-        if (savedState != null){
-          this.turn = savedState[0];
-            this.currentPlayer = players.get(savedState[1]);
-            savedThrown = savedState[2]; 
-        }
-        else{
-            currentPlayer = players.get(0);
-        for (Player p : players) {
-            p.setPosition(0);
-            tiles.get(0).addPlayer(p);
-        }
-        }
-        dice.add(new Dice());
-        dice.add(new Dice());
-        boardSize = tiles.size();
-
-        this.board = new Board(this, players);
-     if (savedState != null) {
-        board.setThrown(savedThrown == 1);
     }
-        board.repaintTile(tiles.get(0));
-        board.highlightCurrentPlayer(currentPlayer);
-        board.updatePassButtonState();
-        // board.refreshPlayerPanels();
-    }
+    // public int startGame() {
+    //     Setup st = new Setup();
+    //     int[] savedState = null;
+    //     try {
+    //         savedState = st.load(players, tiles, bonusTiles);
+    //     } catch (EndGame e) {
+    //         System.out.println(e.getMessage());
+    //         return 0;
+    //     }
+    //     int savedThrown = 0;
+    //     if (savedState != null){
+    //       this.turn = savedState[0];
+    //         this.currentPlayer = players.get(savedState[1]);
+    //         savedThrown = savedState[2]; 
+    //     }
+    //     else{
+    //         currentPlayer = players.get(0);
+    //     for (Player p : players) {
+    //         p.setPosition(0);
+    //         tiles.get(0).addPlayer(p);
+    //     }
+    //     }
+    //     dice.add(new Dice());
+    //     dice.add(new Dice());
+    //     boardSize = tiles.size();
+    //     return savedThrown;
+    // }
 
     public List<Integer> diceThrow() {
         List<Integer> temp = new ArrayList<>();
@@ -79,27 +78,16 @@ public class GameLogic {
         Tile newTile = tiles.get(newPosition);
         newTile.addPlayer(currentPlayer);
 
-
         if (newTile.getName().equals("Go To Jail")) {
             currentPlayer.setPosition(7);
             newTile.removePlayer(currentPlayer);
-            board.repaintTile(newTile);
-            board.repaintTile(oldTile);
             jailTile.addPlayer(currentPlayer);
             currentPlayer.setJailed(true);
             currentPlayer.setJailTime(0);
-            board.repaintTile(jailTile);
             JOptionPane.showMessageDialog(null, "You went to jail!");
-        }
-
-
-        if (board != null) {
-            board.repaintTile(oldTile);
-            board.repaintTile(newTile);
         }
         if (oldPosition > newPosition) {
             currentPlayer.setMoney(currentPlayer.getMoney() + 200);
-            board.refreshPlayerPanels();
         }
         if (newTile.getName().equals("Community Chest") || newTile.getName().equals("Chance")) {
             if (bonusTiles.size() > 0) {
@@ -110,12 +98,10 @@ public class GameLogic {
                     // kapsz pénzt
                     case 0:
                         currentPlayer.setMoney(currentPlayer.getMoney() + bonusCard.getMoney());
-                        board.refreshPlayerPanels();
                         break;
                     // vesztesz pénzt
                     case 1:
                         currentPlayer.setMoney(currentPlayer.getMoney() - bonusCard.getMoney());
-                        board.refreshPlayerPanels();
                         break;
                     // kapsz másoktól pénzt
                     case 2:
@@ -126,7 +112,6 @@ public class GameLogic {
                                 p.setMoney(p.getMoney() - bonusCard.getMoney());
                             }
                         }
-                        board.refreshPlayerPanels();
                         break;
                     // adsz másoknak pénzt
                     case 3:
@@ -137,7 +122,6 @@ public class GameLogic {
                                 p.setMoney(p.getMoney() + bonusCard.getMoney());
                             }
                         }
-                        board.refreshPlayerPanels();
                         break;
                 }
             }
@@ -146,12 +130,8 @@ public class GameLogic {
         if (p.getTiles().contains(newTile)) {
             currentPlayer.setMoney(currentPlayer.getMoney() - newTile.getTax());
             p.setMoney(p.getMoney() + newTile.getTax());
-            board.refreshPlayerPanels();  
         }
         }
-        //rmgimoggmrgm
-    
-        board.updatePassButtonState();
 
     }
 public Player determineWinner() {
@@ -171,25 +151,21 @@ public void newTurn() {
     if (currentPlayer.getJailed()){
         currentPlayer.setJailTime(currentPlayer.getJailTime() +1);
     }
-    board.highlightCurrentPlayer(currentPlayer);
+    // Player lostPlayer = null;
+    // int netWorth = getCurrentPlayerNetWorth();
+    // if (netWorth <= 0) {
+    //     try {
+    //         lostPlayer = currentPlayerLost();
+    //     } catch (PlayerWon pw) {
+    //         board.gameOverScreen();
+    //         JOptionPane.showMessageDialog(null, pw.getMessage());
+    //         return;
+    //     }
+    // }
 
-    Player lostPlayer = null;
-    int netWorth = getCurrentPlayerNetWorth();
-    if (netWorth <= 0) {
-        try {
-            lostPlayer = currentPlayerLost();
-        } catch (PlayerWon pw) {
-            board.gameOverScreen();
-            JOptionPane.showMessageDialog(null, pw.getMessage());
-            return;
-        }
-    }
-
-    if (lostPlayer != null) {
-        board.playerLost(lostPlayer);
-    }
-
-    board.updatePassButtonState();
+    // if (lostPlayer != null) {
+    //     board.playerLost(lostPlayer);
+    // }
 }
 public void nextPlayer(){
  int index = players.indexOf(currentPlayer);
@@ -231,8 +207,10 @@ public int getCurrentPlayerNetWorth() {
         }
     
         if (players.size() - numberOfLost == 1) {
+            //itt kéne highlight elv???
+            //highlightplayer
             Player winner = determineWinner();
-                    board.highlightCurrentPlayer(winner);
+            
             throw new PlayerWon(winner.getName() + " has won the game!");
         } else {
             nextPlayer();
@@ -241,14 +219,14 @@ public int getCurrentPlayerNetWorth() {
     }
     return null;
 }
-public void saveGame(String filename) throws IOException{
+public void saveGame(String filename,boolean thrown) throws IOException{
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));
         oos.writeObject(players);
         oos.writeObject(tiles);
         oos.writeObject(bonusTiles);
         oos.writeInt(turn);
         oos.writeInt(players.indexOf(currentPlayer));
-        if (board.isThrown()){
+        if (thrown){
             oos.writeInt(1);
         }
         else{
@@ -279,8 +257,56 @@ public void saveGame(String filename) throws IOException{
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-}
 
+
+    public boolean currentPlayerHasAllTilesOfColorGroup(Color color) {
+        List<Tile> playerTiles = currentPlayer.getTiles();
+        int sum1 = 0;
+        int sum2 = 0;
+        for (Tile tile : playerTiles) {
+            if (tile.getTileColor().equals(color)) {
+                sum1++;
+            }
+        }
+        for (Tile tile : getTiles()) {
+            if (tile.getTileColor().equals(color)) {
+                sum2++;
+            }
+        }
+        return sum1 == sum2;
+    }
+
+
+    public boolean isTradable(Tile tile) {
+        return ((tile.getOwner() != currentPlayer) && (tile.getOwner().getId() != 100));
+    }
+    public void playerBought(){
+        tiles.get(currentPlayer.getPosition()).setPurchasable(false);
+            currentPlayer.setMoney(currentPlayer.getMoney() - tiles.get(currentPlayer.getPosition()).getPrice());
+            currentPlayer.setTiles(tiles.get(currentPlayer.getPosition()));
+            tiles.get(currentPlayer.getPosition()).setOwner(currentPlayer);
+    }
+    public void playerBoughtHouse(){
+        Tile currentTile = tiles.get(currentPlayer.getPosition());
+        for (Tile tile : tiles) {
+                if (tile.getTileColor().equals(currentTile.getTileColor())) {
+                    tile.setNumberOfHouses(tile.getNumberOfHouses() + 1);
+                    tile.setTax(tile.getTax() + tile.getHouseCost());
+                }
+            }  
+currentPlayer.setMoney(currentPlayer.getMoney() - currentTile.getHouseCost());   
+            currentTile.setSellValue(currentTile.getSellValue() + currentTile.getHouseCost() / 2);
+    }
+    public void playerSold(){
+currentPlayer.setMoney(currentPlayer.getMoney() + getSelectedTile().getSellValue());
+            currentPlayer.getTiles().remove(getSelectedTile());
+            getSelectedTile().setOwner(new Player(100, "-", 0, 0, null, false, Color.BLACK, false));
+            getSelectedTile().setPurchasable(true);
+            getSelectedTile().setSellValue(getSelectedTile().getPrice() / 2);
+            getSelectedTile().setNumberOfHouses(0);
+            getSelectedTile().setTax(getSelectedTile().getPrice()/2);
+    }
+}
 //ha még nem dobott de meg tudja venniissue:(
 //sell house !!!! -> ha egyik mezot eladom amin van ház az összeshöz lemenjen?
 

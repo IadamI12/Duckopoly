@@ -138,9 +138,10 @@ private void checkConfirmButton(){
             tile.setOwner(currentPlayer);
             currentPlayer.setTiles(tile);
             owner.getTiles().remove(tile);
-            board.refreshPlayerPanels();
             board.refreshHouseCount(tile);
-            board.tileBorderUpdate();
+            int tileIndex = board.getTiles().indexOf(tile);
+            board.highlightTileBorder(board.getTileButtons().get(tileIndex),currentPlayer.getPieceColor(),true);
+            board.refreshPlayerPanels(board.getPlayers());
             frame.dispose();
         }
     }
