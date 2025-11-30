@@ -81,7 +81,7 @@ public class GameController implements ActionListener {
     //Saving the game to "gamesave.txt", and also whether the player has thrown
     private void handleSaveButton() {
         try {
-            gameLogic.saveGame("gamesave.txt", board.getThrown());
+            gameLogic.saveGame("hf\\gamesave.txt", board.getThrown());
             board.showMessage("Game saved successfully!");
         } catch (IOException ex) {
             board.showMessage("Failed to save game!" + ex.getMessage());

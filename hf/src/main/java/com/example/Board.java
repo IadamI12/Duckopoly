@@ -157,7 +157,7 @@ public class Board extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 1000);
         this.setTitle("Duckopoly");
-        gameIcon = new ImageIcon("hf\\src\\main\\java\\com\\example\\duck.png");
+        gameIcon = new ImageIcon("hf\\src\\main\\resources\\duck.png");
         this.setIconImage(gameIcon.getImage());
         menuBar = new JMenuBar();
         menu = new JMenu("File");
@@ -232,7 +232,7 @@ public class Board extends JFrame {
         constraints.gridheight = 8;
         constraints.fill = GridBagConstraints.BOTH;
         JPanel middle = new JPanel();
-        ImageIcon duckIcon = new ImageIcon("hf\\src\\main\\java\\com\\example\\duck2.png");
+        ImageIcon duckIcon = new ImageIcon("hf\\src\\main\\resources\\duck2.png");
         middle.setLayout(new BorderLayout());
         middle.add(new JLabel(duckIcon), BorderLayout.CENTER);
         middle.setBackground(new Color(149, 248, 244));

@@ -21,20 +21,20 @@ public class Setup {
     public int[] load(List<Player> players, List<Tile> tiles, List<Bonus> bonusTiles) throws EndGame {
         try {
             //loading the tiles from tiles.txt
-            loadTiles(tiles, "hf\\src\\main\\java\\com\\example\\tiles.txt");
+            loadTiles(tiles, "hf\\src\\main\\resources\\tiles.txt");
         } catch (IOException e) {
             throw new EndGame("Failed to load the tiles from file");
         }
         try {
             //loading the bonusTiles from bonustiles.txt
-            loadBonusTiles(bonusTiles, "hf\\src\\main\\java\\com\\example\\bonustiles.txt");
+            loadBonusTiles(bonusTiles, "hf\\src\\main\\resources\\bonustiles.txt");
         } catch (IOException e) {
             throw new EndGame("Failed to load the bonustiles from file");
         }
         String[] responses = { "New game", "Load old game", "Cancel" };
         JLabel message = new JLabel("Choose an option to start:");
         message.setFont(new Font("Times New Roman", Font.BOLD, 22));
-        ImageIcon icon = new ImageIcon("hf\\src\\main\\java\\com\\example\\duck.png");
+        ImageIcon icon = new ImageIcon("hf\\src\\main\\resources\\duck.png");
         //saving the response the user gives
         int response = JOptionPane.showOptionDialog(null, message, "Duckopoly", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, icon, responses, 0);
@@ -110,7 +110,7 @@ public class Setup {
     //loading the game from a saved file (gamesave.txt)
     public int[] loadFromFile(List<Player> players, List<Tile> tiles, List<Bonus> bonusTiles)
             throws ClassNotFoundException, IOException {
-        String filename = "gamesave.txt";
+        String filename = "hf\\gamesave.txt";
         File f = new File(filename);     
         if (!f.exists()) {
             throw new IOException("Save file not found at: " + f.getAbsolutePath());

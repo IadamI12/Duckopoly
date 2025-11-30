@@ -44,7 +44,7 @@ public class TradeWindow implements ActionListener {
         frame.setResizable(false);
         // Setting the location to the middle of the board
         frame.setLocationRelativeTo(board);
-        ImageIcon icon = new ImageIcon("hf/src/main/java/com/example/villager.png");
+        ImageIcon icon = new ImageIcon("hf/src/main/resources/villager.png");
         frame.setIconImage(icon.getImage());
         // Creating the left panel and filling it with the tile info
         JPanel leftPanel = new JPanel();
