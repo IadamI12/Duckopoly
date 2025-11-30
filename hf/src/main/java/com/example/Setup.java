@@ -3,8 +3,6 @@ package com.example;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -12,15 +10,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.print.DocFlavor.STRING;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
 
 public class Setup{
     public int[] load(List<Player> players, List<Tile> tiles,List<Bonus> bonusTiles) throws EndGame{
@@ -134,7 +128,6 @@ System.out.println("Looking for save file at: " + f.getAbsolutePath());
 
     private void loadTiles(List<Tile> tiles, String filename) throws IOException{
         BufferedReader br = new BufferedReader(new FileReader(filename)); 
-            String line;
             while (true){
                 String line1 = br.readLine();
                 if (line1 == null) break;

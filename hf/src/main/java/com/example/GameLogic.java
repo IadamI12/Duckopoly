@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 public class GameLogic {
     private List<Player> players = new ArrayList<>();
     private List<Tile> tiles = new ArrayList<>();

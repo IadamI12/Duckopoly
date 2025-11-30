@@ -1,22 +1,10 @@
 package com.example;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
 public class GameController implements ActionListener {
     private GameLogic gameLogic;
     private Board board;
@@ -237,6 +225,7 @@ private void handleSellButton(){
 }
 private void handleTradeButton(){
     TradeWindow tradeWindow = new TradeWindow(board, gameLogic.getCurrentPlayer(), gameLogic.getSelectedTile());
+    tradeWindow = (TradeWindow) tradeWindow;
     board.disableTradeButton();
 }
 
