@@ -145,7 +145,7 @@ private void checkPlayerLost() {
                             board.disableBuyButton();
                         }
                         if (selectedTile.getHousePurchasable() == true &&
-                                currentPlayer.getMoney() >= selectedTile.getHouseCost() &&
+                                currentPlayer.getMoney() >= gameLogic.getHouseCostForAllHouses(selectedTile) &&
                                 selectedTile.getNumberOfHouses() < 5 &&
                                 currentPlayer.getTiles().contains(selectedTile) &&
                                 gameLogic.currentPlayerHasAllTilesOfColorGroup(
@@ -178,7 +178,7 @@ private void handleBuyButton(){
     board.disableBuyButton();
     board.enableSellButton();
             if (currentTile.getHousePurchasable() == true &&
-                    currentPlayer.getMoney() >= currentTile.getHouseCost() &&
+                    currentPlayer.getMoney() >= gameLogic.getHouseCostForAllHouses(currentTile) &&
                     currentTile.getNumberOfHouses() < 5 &&
                     currentPlayer.getTiles().contains(currentTile) &&
                     gameLogic.currentPlayerHasAllTilesOfColorGroup(currentTile.getTileColor())){
@@ -203,7 +203,7 @@ private void handleHouseButton(){
             gameLogic.playerBoughtHouse();
 
             if (currentTile.getHousePurchasable() == true &&
-                    currentPlayer.getMoney() >= currentTile.getHouseCost() &&
+                    currentPlayer.getMoney() >= gameLogic.getHouseCostForAllHouses(currentTile) &&
                     currentTile.getNumberOfHouses() < 5 &&
                     currentPlayer.getTiles().contains(currentTile)) {
                 board.enableHouseButton();

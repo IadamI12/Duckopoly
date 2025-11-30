@@ -286,6 +286,16 @@ public void saveGame(String filename,boolean thrown) throws IOException{
             currentPlayer.setTiles(tiles.get(currentPlayer.getPosition()));
             tiles.get(currentPlayer.getPosition()).setOwner(currentPlayer);
     }
+public int getHouseCostForAllHouses(Tile tile){
+    int sum = 0;
+    Color selectedColor = tile.getTileColor();
+    for (Tile t : tiles){
+        if (t.getTileColor().equals(selectedColor)){
+            sum += t.getHouseCost();
+        }
+    }
+    return sum;
+}
     public void playerBoughtHouse(){
         Tile currentTile = tiles.get(currentPlayer.getPosition());
         for (Tile tile : tiles) {
@@ -294,7 +304,7 @@ public void saveGame(String filename,boolean thrown) throws IOException{
                     tile.setTax(tile.getTax() + tile.getHouseCost());
                 }
             }  
-currentPlayer.setMoney(currentPlayer.getMoney() - currentTile.getHouseCost());   
+currentPlayer.setMoney(currentPlayer.getMoney() - getHouseCostForAllHouses(currentTile));   
             currentTile.setSellValue(currentTile.getSellValue() + currentTile.getHouseCost() / 2);
     }
     public void playerSold(){
@@ -315,7 +325,3 @@ currentPlayer.setMoney(currentPlayer.getMoney() + getSelectedTile().getSellValue
 
 
 //RELATIVE PATH KÉPEKKEL KIPROBALNI PLS PLS
-
-// dc otlet
-// 1 szamhoz legyen kotve a tablameret? karbantarthatosag
-// g*jdoskonyv, hk imsc osztondij, kollegiumi befizetés
