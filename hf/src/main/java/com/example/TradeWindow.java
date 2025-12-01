@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -72,7 +74,9 @@ public class TradeWindow implements ActionListener {
         frame.setResizable(false);
         // Setting the location to the middle of the board
         frame.setLocationRelativeTo(board);
-        ImageIcon icon = new ImageIcon("hf/src/main/resources/villager.png");
+        String filename = "hf/src/main/resources/villager.png";
+        String filePath = filename.replace("/", File.separator);
+        ImageIcon icon = new ImageIcon(filePath);
         frame.setIconImage(icon.getImage());
         // Creating the left panel and filling it with the tile info
         JPanel leftPanel = new JPanel();

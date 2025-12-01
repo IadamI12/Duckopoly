@@ -55,7 +55,9 @@ public class Setup {
         String[] responses = { "New game", "Load old game", "Cancel" };
         JLabel message = new JLabel("Choose an option to start:");
         message.setFont(new Font("Times New Roman", Font.BOLD, 22));
-        ImageIcon icon = new ImageIcon("hf\\src\\main\\resources\\duck.png");
+        String filename = "hf\\src\\main\\resources\\duck.png";
+        String filePath = filename.replace("\\", File.separator);
+        ImageIcon icon = new ImageIcon(filePath);
         // saving the response the user gives
         int response = JOptionPane.showOptionDialog(null, message, "Duckopoly", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, icon, responses, 0);
@@ -189,7 +191,13 @@ public class Setup {
      * @throws IOException - if an io exception happens
      */
     private void loadTiles(List<Tile> tiles, String filename) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+        //making it work on linux and windows as well
+        String filePath = filename.replace("\\", File.separator).replace("/", File.separator);
+        File file = new File(filePath);
+        if (!file.exists()) {
+        throw new IOException("File not found: " + filePath);
+        }
+        BufferedReader br = new BufferedReader(new FileReader(file));
         while (true) {
             String line1 = br.readLine();
             if (line1 == null)
@@ -218,7 +226,12 @@ public class Setup {
      * @throws IOException - if an io exception happens
      */
     private void loadBonusTiles(List<Bonus> bonusTiles, String filename) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+        String filePath = filename.replace("\\", File.separator).replace("/", File.separator);
+        File file = new File(filePath);
+        if (!file.exists()) {
+        throw new IOException("File not found: " + filePath);
+        }
+        BufferedReader br = new BufferedReader(new FileReader(file));
         while (true) {
             String line2 = br.readLine();
             if (line2 == null)

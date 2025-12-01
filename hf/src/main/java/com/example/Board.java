@@ -26,6 +26,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -291,7 +292,10 @@ public class Board extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 1000);
         this.setTitle("Duckopoly");
-        gameIcon = new ImageIcon("hf\\src\\main\\resources\\duck.png");
+        String filename = "hf\\src\\main\\resources\\duck.png";
+        String filePath = filename.replace("\\", File.separator);
+        ImageIcon icon = new ImageIcon(filePath);
+        gameIcon = new ImageIcon(filePath);
         this.setIconImage(gameIcon.getImage());
         menuBar = new JMenuBar();
         menu = new JMenu("File");
@@ -371,7 +375,9 @@ public class Board extends JFrame {
         constraints.gridheight = 8;
         constraints.fill = GridBagConstraints.BOTH;
         JPanel middle = new JPanel();
-        ImageIcon duckIcon = new ImageIcon("hf\\src\\main\\resources\\duck2.png");
+        String filename = "hf\\src\\main\\resources\\duck2.png";
+        String filePath = filename.replace("\\", File.separator);
+        ImageIcon duckIcon = new ImageIcon(filePath);
         middle.setLayout(new BorderLayout());
         middle.add(new JLabel(duckIcon), BorderLayout.CENTER);
         middle.setBackground(new Color(149, 248, 244));
