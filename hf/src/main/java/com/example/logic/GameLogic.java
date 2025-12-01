@@ -1,6 +1,7 @@
 package com.example.logic;
 
 import java.awt.Color;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -333,7 +334,7 @@ public class GameLogic {
      * @param thrown   - whether the current player has thrown or not
      * @throws IOException - if theres an io exception
      */
-    public void saveGame(String filename, boolean thrown) throws IOException {
+    public void saveGame(File filename, boolean thrown) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));
         oos.writeObject(players);
         oos.writeObject(tiles);

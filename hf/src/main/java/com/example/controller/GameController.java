@@ -2,9 +2,11 @@ package com.example.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import com.example.exception.PlayerWon;
@@ -130,14 +132,14 @@ public class GameController implements ActionListener {
             // unfortunate news
             board.gameOverScreen();
             board.highlightCurrentPlayer(gameLogic.getCurrentPlayer(), gameLogic.getPlayers());
-// setting the lost player's tiles so it doesn't show that he still owns it
-        for (int i = 0; i < board.getTileButtons().size() && i < board.getTiles().size(); i++) {
-            JButton button = board.getTileButtons().get(i);
-            Tile tile = board.getTiles().get(i);
-            if (tile.getOwner().getId() == 100) {
-                board.highlightTileBorder(button, null, false);
+            // setting the lost player's tiles so it doesn't show that he still owns it
+            for (int i = 0; i < board.getTileButtons().size() && i < board.getTiles().size(); i++) {
+                JButton button = board.getTileButtons().get(i);
+                Tile tile = board.getTiles().get(i);
+                if (tile.getOwner().getId() == 100) {
+                    board.highlightTileBorder(button, null, false);
+                }
             }
-        }
             board.showMessage(pw.getMessage());
         }
     }
@@ -147,8 +149,14 @@ public class GameController implements ActionListener {
      */
     private void handleSaveButton() {
         try {
-            gameLogic.saveGame("hf\\gamesave.txt", board.getThrown());
-            board.showMessage("Game saved successfully!");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("."));
+            int response = fileChooser.showSaveDialog(null);
+            if (response == JFileChooser.APPROVE_OPTION) {
+                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                gameLogic.saveGame(file, board.getThrown());
+                board.showMessage("Game saved successfully!");
+            }
         } catch (IOException ex) {
             board.showMessage("Failed to save game!" + ex.getMessage());
         }

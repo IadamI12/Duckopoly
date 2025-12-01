@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -77,7 +78,15 @@ public class Setup {
         } else {
             try {
                 // load in a saved game if possible
-                return loadFromFile(players, tiles, bonusTiles);
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("."));
+                int buttonSelected = fileChooser.showOpenDialog(null);
+                if (buttonSelected == (JFileChooser.APPROVE_OPTION)) {
+                    File filenamee = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                    return loadFromFile(players, tiles, bonusTiles, filenamee);
+                } else {
+                    throw new EndGame("Game start has been cancelled.");
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -158,13 +167,10 @@ public class Setup {
      * @throws ClassNotFoundException - if the class couldnt be found
      * @throws IOException            - if an io exception happens
      */
-    public int[] loadFromFile(List<Player> players, List<Tile> tiles, List<Bonus> bonusTiles)
-
+    public int[] loadFromFile(List<Player> players, List<Tile> tiles, List<Bonus> bonusTiles, File filename)
             throws ClassNotFoundException, IOException {
-        String filename = "hf\\gamesave.txt";
-        File f = new File(filename);
-        if (!f.exists()) {
-            throw new IOException("Save file not found at: " + f.getAbsolutePath());
+        if (!filename.exists()) {
+            throw new IOException("Save file not found at: " + filename.getAbsolutePath());
         }
         // storing the information that was saved in the file
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename));
@@ -177,7 +183,7 @@ public class Setup {
         // clear in case any dump data was left
         players.clear();
         players.addAll(loadedPlayers);
-        
+
         tiles.clear();
         tiles.addAll(loadedTiles);
 
@@ -197,11 +203,11 @@ public class Setup {
      * @throws IOException - if an io exception happens
      */
     private void loadTiles(List<Tile> tiles, String filename) throws IOException {
-        //making it work on linux and windows as well
+        // making it work on linux and windows as well
         String filePath = filename.replace("\\", File.separator).replace("/", File.separator);
         File file = new File(filePath);
         if (!file.exists()) {
-        throw new IOException("File not found: " + filePath);
+            throw new IOException("File not found: " + filePath);
         }
         BufferedReader br = new BufferedReader(new FileReader(file));
         while (true) {
@@ -235,7 +241,7 @@ public class Setup {
         String filePath = filename.replace("\\", File.separator).replace("/", File.separator);
         File file = new File(filePath);
         if (!file.exists()) {
-        throw new IOException("File not found: " + filePath);
+            throw new IOException("File not found: " + filePath);
         }
         BufferedReader br = new BufferedReader(new FileReader(file));
         while (true) {
