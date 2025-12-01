@@ -161,7 +161,8 @@ public class Setup {
      * 
      * @param players    - the list of players
      * @param tiles      - the list of tiles
-     * @param bonusTiles - the list of bonustiles
+     * @param bonusTiles - the list of bonustilesű
+     * @param filename   - the file to load from
      * @return int[] - an array containing extra information about the loaded game
      *         (turn, currentPlayerIndex, currentPlayerThrown)
      * @throws ClassNotFoundException - if the class couldnt be found

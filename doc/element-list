@@ -1,1 +1,4 @@
-com.example
+com.example.controller
+com.example.exception
+com.example.gui
+com.example.logic
