@@ -1,4 +1,4 @@
-package com.example;
+package com.example.gui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,6 +9,9 @@ import java.awt.RenderingHints;
 import java.util.List;
 
 import javax.swing.Icon;
+
+import com.example.logic.Player;
+import com.example.logic.Tile;
 
 /**
  * A class to store the icon's corresponding to the players of the game

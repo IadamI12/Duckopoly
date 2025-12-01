@@ -1,4 +1,4 @@
-package com.example;
+package com.example.logic;
 
 import java.io.Serializable;
 

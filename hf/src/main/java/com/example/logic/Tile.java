@@ -1,4 +1,4 @@
-package com.example;
+package com.example.logic;
 
 import java.awt.Color;
 import java.io.Serializable;

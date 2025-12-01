@@ -1,4 +1,4 @@
-package com.example;
+package com.example.logic;
 
 import java.awt.Color;
 import java.io.FileOutputStream;
@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.example.exception.PlayerWon;
 
 /**
  * The brain of the game, handling all the logic

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.exception;
 
 /**
  * A class handling the end of the game when no player has won

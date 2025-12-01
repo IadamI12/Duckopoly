@@ -1,4 +1,4 @@
-package com.example;
+package com.example.exception;
 
 /**
  * A class handling a player winning

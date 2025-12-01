@@ -1,4 +1,4 @@
-package com.example;
+package com.example.logic;
 
 import java.util.List;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +6,13 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+import com.example.exception.PlayerWon;
+import com.example.gui.Board;
+import com.example.gui.TradeWindow;
+import com.example.logic.GameLogic;
+import com.example.logic.Player;
+import com.example.logic.Tile;
 
 /**
  * A class to connect the GUI with the game logic

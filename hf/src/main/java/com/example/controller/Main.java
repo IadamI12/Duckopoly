@@ -1,7 +1,15 @@
-package com.example;
+package com.example.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.exception.EndGame;
+import com.example.gui.Board;
+import com.example.logic.Bonus;
+import com.example.logic.Dice;
+import com.example.logic.GameLogic;
+import com.example.logic.Player;
+import com.example.logic.Tile;
 
 /**
  * The main class to start the game
