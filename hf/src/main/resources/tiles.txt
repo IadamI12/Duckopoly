@@ -1,28 +1,28 @@
 Start;0;0;0;0;#ffffff;0;0
-Old Kent Road;5;5;5;0;#bd7e66;1;1
+F*t;5;5;5;0;#bd7e66;1;1
 Community Chest;0;0;0;0;#999999;0;0
-Whitechapel Road;7;5;7;0;#bd7e66;1;1
-Kings Cross Station;15;15;10;0;#e32929;1;1
+Shrek's Hut;7;5;7;0;#bd7e66;1;1
+Andreas Acropolis;15;15;10;0;#e32929;1;1
 Chance;0;0;0;0;#999999;0;0
-The Angel Islington;15;15;10;0;#e32929;1;1
+Tibi Town;15;15;10;0;#e32929;1;1
 Jail;0;0;0;0;#999999;0;0
-Euston Road;20;20;15;0;#e32929;1;1
-Pentonville Road;35;25;20;0;#7345a8;1;1
+Vince Village;20;20;15;0;#e32929;1;1
+Going Merry;35;25;20;0;#7345a8;1;1
 Community Chest;0;0;0;0;#999999;0;0
-Pall Mall;35;25;20;0;#7345a8;1;1
-Electric Company;40;30;25;0;#7345a8;1;1
-Whitehall;55;30;30;0;#48b028;1;1
+Fairy Tail;35;25;20;0;#7345a8;1;1
+Shiganshina;40;30;25;0;#7345a8;1;1
+BME - E;55;30;30;0;#48b028;1;1
 Free Parking;0;0;0;0;#999999;0;0
-Northumberland;55;40;40;0;#48b028;1;1
-Marylebone Station;60;50;40;0;#48b028;1;1
-Bow Street;80;70;50;0;#28a7b0;1;1
-Marlborough Street;80;70;50;0;#28a7b0;1;1
-Vine Street;90;90;55;0;#28a7b0;1;1
-Strand;115;100;65;0;#eded0e;1;1
+BME - Q;55;40;40;0;#48b028;1;1
+BME - I;60;50;40;0;#48b028;1;1
+Bob Street;80;70;50;0;#28a7b0;1;1
+Greg Street;80;70;50;0;#28a7b0;1;1
+George Street;90;90;55;0;#28a7b0;1;1
+Big$mithy;115;100;65;0;#eded0e;1;1
 Go To Jail;0;0;0;0;#999999;0;0
-Fleet Street;115;100;65;0;#eded0e;1;1
+Tác;115;100;65;0;#eded0e;1;1
 Chance;0;0;0;0;#999999;0;0
-Trafalgar Square;130;125;70;0;#eded0e;1;1
-Water Works;180;150;80;0;#2b0ee6;1;1
+Hortobágy;130;125;70;0;#eded0e;1;1
+Busytown;180;150;80;0;#2b0ee6;1;1
 Chance;0;0;0;0;#999999;0;0
-Piccadilly;200;180;85;0;#2b0ee6;1;1
+Radiator Springs;200;180;85;0;#2b0ee6;1;1
