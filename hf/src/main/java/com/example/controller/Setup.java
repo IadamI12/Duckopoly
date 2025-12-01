@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -83,7 +84,12 @@ public class Setup {
                 int buttonSelected = fileChooser.showOpenDialog(null);
                 if (buttonSelected == (JFileChooser.APPROVE_OPTION)) {
                     File filenamee = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                    return loadFromFile(players, tiles, bonusTiles, filenamee);
+                    try{
+                    int[] loadData = loadFromFile(players, tiles, bonusTiles, filenamee);
+                    return loadData;
+                    } catch (StreamCorruptedException sce) {
+                        throw new EndGame("Failed to load game: The selected file is not a valid save file.");
+                    }
                 } else {
                     throw new EndGame("Game start has been cancelled.");
                 }
@@ -167,9 +173,10 @@ public class Setup {
      *         (turn, currentPlayerIndex, currentPlayerThrown)
      * @throws ClassNotFoundException - if the class couldnt be found
      * @throws IOException            - if an io exception happens
+     * @throws StreamCorruptedException - if the stream is corrupted (wrong file selected)
      */
     public int[] loadFromFile(List<Player> players, List<Tile> tiles, List<Bonus> bonusTiles, File filename)
-            throws ClassNotFoundException, IOException {
+            throws ClassNotFoundException, IOException, StreamCorruptedException {
         if (!filename.exists()) {
             throw new IOException("Save file not found at: " + filename.getAbsolutePath());
         }
