@@ -20,16 +20,44 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-//A class handling the trading
+/**
+ * A class handling the trading
+ * 
+ * @author Pap Ádám
+ */
 public class TradeWindow implements ActionListener {
+    /**
+     * The player who wants to trade
+     */
     private Player currentPlayer;
+    /**
+     * The tile involved in the trade
+     */
     private Tile tile;
+    /**
+     * The game board
+     */
     private Board board;
+    /**
+     * The frame of the trade window
+     */
     private JFrame frame;
+    /**
+     * The text field for entering the offer amount
+     */
     private JTextField area;
+    /**
+     * The confirm button for the trade
+     */
     private JButton confirmButton;
 
-    // Creating the trade window, storing the data needed
+    /**
+     * Constructor for the TradeWindow class
+     * 
+     * @param board         - the game board
+     * @param currentPlayer - the player who wants to trade
+     * @param tile          - the tile involved in the trade
+     */
     public TradeWindow(Board board, Player currentPlayer, Tile tile) {
         this.board = board;
         this.currentPlayer = currentPlayer;
@@ -122,7 +150,9 @@ public class TradeWindow implements ActionListener {
 
     }
 
-    // Check if the confirm button should be enabled
+    /**
+     * Check if the confirm button should be enabled
+     */
     private void checkConfirmButton() {
         try {
             // disabling the button if the input is invalid
@@ -136,8 +166,12 @@ public class TradeWindow implements ActionListener {
         }
     }
 
+    /**
+     * Handling the confirm button being pressed
+     * 
+     * @param e - the action event
+     */
     @Override
-    // Handling the confirm button being pressed
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == confirmButton) {

@@ -9,22 +9,47 @@ import java.awt.RenderingHints;
 import java.util.List;
 
 import javax.swing.Icon;
-//A class to store the icon's corresponding to the players of the game
-public class PlayerIcon implements Icon{
+
+/**
+ * A class to store the icon's corresponding to the players of the game
+ * 
+ * @author Pap Ádám
+ */
+public class PlayerIcon implements Icon {
+    /**
+     * The tile of the icon
+     */
     private Tile tile;
+    /**
+     * The size of the icon
+     */
     private int size;
 
-    public PlayerIcon(Tile tile,int size){
+    /**
+     * Constructor for the PlayerIcon class
+     * 
+     * @param tile - the tile of the icon
+     * @param size - the size of the icon
+     */
+    public PlayerIcon(Tile tile, int size) {
         this.tile = tile;
         this.size = size;
     }
-    //Painting the icon of the player onto the butotns as triangles
+
+    /**
+     * Painting the icon of the player onto the buttons as triangles
+     * 
+     * @param c - the component to be painted on
+     * @param g - the graphics object to be used for painting
+     * @param x - the x coordinate of the icon
+     * @param y - the y coordinate of the icon
+     */
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         Graphics2D g2 = (Graphics2D) g.create();
         try {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                                RenderingHints.VALUE_ANTIALIAS_ON);
+                    RenderingHints.VALUE_ANTIALIAS_ON);
 
             g2.setColor(tile.getTileColor());
             g2.fillRect(x, y, size, size);
@@ -44,15 +69,27 @@ public class PlayerIcon implements Icon{
                 int cx, cy;
                 int triSize = size / 3;
                 switch (i) {
-                    case 0 -> { cx = x+ triSize;cy = y+ triSize; }           
-                    case 1 -> { cx = x+ size-triSize; cy = y +triSize; }           
-                    case 2 -> { cx = x+triSize;cy = y + size- triSize; }    
-                    default -> { cx = x+size- triSize;cy = y +size - triSize; }   
+                    case 0 -> {
+                        cx = x + triSize;
+                        cy = y + triSize;
+                    }
+                    case 1 -> {
+                        cx = x + size - triSize;
+                        cy = y + triSize;
+                    }
+                    case 2 -> {
+                        cx = x + triSize;
+                        cy = y + size - triSize;
+                    }
+                    default -> {
+                        cx = x + size - triSize;
+                        cy = y + size - triSize;
+                    }
                 }
 
-                tri.addPoint(cx,cy - triSize / 2);
-                tri.addPoint(cx - triSize/2,cy + triSize / 2);
-                tri.addPoint(cx + triSize/2,cy + triSize / 2);
+                tri.addPoint(cx, cy - triSize / 2);
+                tri.addPoint(cx - triSize / 2, cy + triSize / 2);
+                tri.addPoint(cx + triSize / 2, cy + triSize / 2);
 
                 g2.fill(tri);
                 g2.setColor(Color.BLACK);
@@ -63,14 +100,24 @@ public class PlayerIcon implements Icon{
         }
     }
 
+    /**
+     * Getter for the width of the icon
+     * 
+     * @return int - the width of the icon
+     */
     @Override
     public int getIconWidth() {
         return size;
     }
 
+    /**
+     * Getter for the height of the icon
+     * 
+     * @return int - the height of the icon
+     */
     @Override
     public int getIconHeight() {
         return size;
     }
-    
+
 }

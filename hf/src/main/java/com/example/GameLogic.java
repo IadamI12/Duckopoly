@@ -8,18 +8,61 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The brain of the game, handling all the logic
+ * 
+ * @author Pap Ádám
+ */
 public class GameLogic {
+    /**
+     * the players of the game
+     */
     private List<Player> players = new ArrayList<>();
+
+    /**
+     * the tiles of the game
+     */
     private List<Tile> tiles = new ArrayList<>();
+    /**
+     * the bonus tiles of the game
+     */
     private List<Bonus> bonusTiles = new ArrayList<>();
+    /**
+     * Random number generator
+     */
     private Random random = new Random();
+    /**
+     * the dices of the game
+     */
     private List<Dice> dice = new ArrayList<>();
+    /**
+     * the currently selected tile
+     */
     private int selectedTilePosition;
+    /**
+     * the size of the board
+     */
     private int boardSize;
+    /**
+     * the current turn
+     */
     private int turn = 0;
+    /**
+     * the current player
+     */
     private Player currentPlayer;
 
-    // Storing the date to the gamelogic
+    /**
+     * Storing the data to the gamelogic
+     * 
+     * @param players       - list of players
+     * @param tiles         - list of tiles
+     * @param bonusTiles    - list of bonus tiles
+     * @param dice          - list of dices
+     * @param boardSize     - size of the board
+     * @param currentPlayer - the current player
+     * @param turn          - the current turn
+     */
     public GameLogic(List<Player> players, List<Tile> tiles, List<Bonus> bonusTiles, List<Dice> dice, int boardSize,
             Player currentPlayer, int turn) {
         this.players = players;
@@ -33,33 +76,66 @@ public class GameLogic {
     }
 
     // ----------Setters and getters------------------
-    // I wont document them individually, since they're self explenatory
+    /**
+     * Getting the size of the board
+     * 
+     * @return int - the size of the board
+     */
     public int getBoardSize() {
         return boardSize;
     }
 
+    /**
+     * Selecting a tile by its index
+     * 
+     * @param i - the index of the tile to select
+     */
     public void selectTile(int i) {
         selectedTilePosition = i;
     }
 
+    /**
+     * Getting the selected tile
+     * 
+     * @return Tile - the selected tile
+     */
     public Tile getSelectedTile() {
         return tiles.get(selectedTilePosition);
     }
 
+    /**
+     * Getting the list of players
+     * 
+     * @return {@code List<Player>} - the list of players
+     */
     public List<Player> getPlayers() {
         return players;
     }
 
+    /**
+     * Getting the list of tiles
+     * 
+     * @return {@code List<Tile>} - the list of tiles
+     */
     public List<Tile> getTiles() {
         return tiles;
     }
 
+    /**
+     * Getting the current player
+     * 
+     * @return Player - the current player
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-    // ----------Setters and getters------------------
 
-    // Returning the result of the dicethrow
+    // ----------Setters and getters------------------
+    /**
+     * Returning the result of the dicethrow
+     * 
+     * @return {@code List<Integer>} - the result of the dicethrow
+     */
     public List<Integer> diceThrow() {
         List<Integer> temp = new ArrayList<>();
         int firstDice = dice.get(0).roll();
@@ -69,8 +145,13 @@ public class GameLogic {
         return temp;
     }
 
-    // Moving the player based on where he is, and what tile he was on / he stepped
-    // on
+    /**
+     * Moving the player based on where he is, and what tile he was on / he stepped
+     * on
+     * 
+     * @param numberOfTiles - the number of tiles to move forward
+     * @return String - message to write out based on what happened
+     */
     public String movePlayer(int numberOfTiles) {
         String whatToWriteOut = null;
         // Store the tile index
@@ -146,7 +227,11 @@ public class GameLogic {
         return whatToWriteOut;
     }
 
-    // Determining the winner of the game
+    /**
+     * Determining the winner of the game
+     * 
+     * @return Player - the winner of the game
+     */
     public Player determineWinner() {
         Player winner = null;
         for (Player p : players) {
@@ -159,7 +244,9 @@ public class GameLogic {
         return winner;
     }
 
-    // Starting a new turn, changing the current player
+    /**
+     * Starting a new turn, changing the current player
+     */
     public void newTurn() {
         turn++;
         nextPlayer();
@@ -169,7 +256,9 @@ public class GameLogic {
         }
     }
 
-    // Determine who's the next player, skipping the lost ones
+    /**
+     * Determine who's the next player, skipping the lost ones
+     */
     public void nextPlayer() {
         int index = players.indexOf(currentPlayer);
         for (int i = 0; i < players.size(); i++) {
@@ -182,7 +271,11 @@ public class GameLogic {
         }
     }
 
-    // Calculate the net worth of the current player
+    /**
+     * Calculating the net worth of the current player
+     * 
+     * @return int - the net worth of the current player
+     */
     public int getCurrentPlayerNetWorth() {
         int netWorth = currentPlayer.getMoney();
         for (Tile t : currentPlayer.getTiles()) {
@@ -191,7 +284,12 @@ public class GameLogic {
         return netWorth;
     }
 
-    // Checking if the current player has lost
+    /**
+     * Checking if the current player has lost
+     * 
+     * @return Player - the player who lost, or null if no one lost
+     * @throws PlayerWon - if a player has won the game
+     */
     public Player currentPlayerLost() throws PlayerWon {
         int currentPlayerMoney = getCurrentPlayerNetWorth();
         if (currentPlayerMoney < 0) {
@@ -226,7 +324,13 @@ public class GameLogic {
         return null;
     }
 
-    // Saving the game state to a file
+    /**
+     * Saving the game state to a file
+     * 
+     * @param filename - the name of the file to save to
+     * @param thrown   - whether the current player has thrown or not
+     * @throws IOException - if theres an io exception
+     */
     public void saveGame(String filename, boolean thrown) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));
         oos.writeObject(players);
@@ -242,7 +346,13 @@ public class GameLogic {
         oos.close();
     }
 
-    // Checking if the current player has all the tiles of a color group
+    /**
+     * Checking if the current player has all the tiles of a color group
+     * 
+     * @param color - the color to check
+     * @return boolean - true if the current player has all the tiles of the color
+     *         group, false otherwise
+     */
     public boolean currentPlayerHasAllTilesOfColorGroup(Color color) {
         List<Tile> playerTiles = currentPlayer.getTiles();
         int sum1 = 0;
@@ -262,13 +372,20 @@ public class GameLogic {
         return sum1 == sum2;
     }
 
-    // checking if a tile is tradable (someone owns it and its not the player who's
-    // turn it is)
+    /**
+     * Checking if a tile is tradable (someone owns it and its not the player who's
+     * turn it is)
+     * 
+     * @param tile - the tile to check
+     * @return boolean - true if the tile is tradable, false otherwise
+     */
     public boolean isTradable(Tile tile) {
         return ((tile.getOwner() != currentPlayer) && (tile.getOwner().getId() != 100));
     }
 
-    // Handling if the player has bought the tile he's standing on
+    /**
+     * Handling if the player has bought the tile he's standing on
+     */
     public void playerBought() {
         tiles.get(currentPlayer.getPosition()).setPurchasable(false);
         currentPlayer.setMoney(currentPlayer.getMoney() - tiles.get(currentPlayer.getPosition()).getPrice());
@@ -276,7 +393,12 @@ public class GameLogic {
         tiles.get(currentPlayer.getPosition()).setOwner(currentPlayer);
     }
 
-    // Determining the cost to buy a house onto the color of a given tile
+    /**
+     * Determining the cost to buy a house onto the color of a given tile
+     * 
+     * @param tile - tile to check the color of
+     * @return int - the total cost of buying a house on all tiles of the color
+     */
     public int getHouseCostForAllHouses(Tile tile) {
         int sum = 0;
         Color selectedColor = tile.getTileColor();
@@ -288,7 +410,9 @@ public class GameLogic {
         return sum;
     }
 
-    // Changing the player's balance, since he bought a house
+    /**
+     * Changing the player's balance, since he bought a house
+     */
     public void playerBoughtHouse() {
         Tile currentTile = tiles.get(currentPlayer.getPosition());
         for (Tile tile : tiles) {
@@ -301,7 +425,9 @@ public class GameLogic {
         currentTile.setSellValue(currentTile.getSellValue() + currentTile.getHouseCost() / 2);
     }
 
-    // Handling a player selling his property
+    /**
+     * Handling a player selling his property
+     */
     public void playerSold() {
         // player's money, and tiles being changed
         currentPlayer.setMoney(currentPlayer.getMoney() + getSelectedTile().getSellValue());
