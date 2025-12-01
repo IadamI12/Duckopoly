@@ -407,7 +407,6 @@ public class Board extends JFrame {
             button.repaint();
         }
     }
-
     /**
      * Creating the right side of the screen, the whole menu
      * 

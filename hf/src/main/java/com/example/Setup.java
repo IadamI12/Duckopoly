@@ -134,7 +134,7 @@ public class Setup {
                 throw new EndGame("Game start has been cancelled.");
             }
             // create the players
-            Player newPlayer = new Player(i, name.trim(), 20, 0, null, false, playerColors.get(i), false);
+            Player newPlayer = new Player(i, name.trim(), 150, 0, null, false, playerColors.get(i), false);
             players.add(newPlayer);
         }
     }
