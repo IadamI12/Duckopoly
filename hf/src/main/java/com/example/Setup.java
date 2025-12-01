@@ -171,7 +171,7 @@ public class Setup {
         // clear in case any dump data was left
         players.clear();
         players.addAll(loadedPlayers);
-
+        
         tiles.clear();
         tiles.addAll(loadedTiles);
 
