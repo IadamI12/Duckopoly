@@ -1,0 +1,304 @@
+@startuml Duckopoly Class Diagram
+
+title Duckopoly - Test Class Diagram
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "com.example.logic" {
+    class Player {
+        - id: int
+        - name: String
+        - money: int
+        - position: int
+        - tiles: List<Tile>
+        - jailed: boolean
+        - jailTime: int
+        - pieceColor: Color
+        - lost: boolean
+        + Player(id, name, money, position, tiles, jailed, pieceColor, lost)
+        + getId(): int
+        + getName(): String
+        + getPosition(): int
+        + getMoney(): int
+        + setMoney(money): void
+        + setPosition(position): void
+        + getTiles(): List<Tile>
+        + setTiles(t: Tile): void
+        + setJailed(jailed): void
+        + getJailed(): boolean
+        + setJailTime(jailTime): void
+        + getJailTime(): int
+        + getPieceColor(): Color
+        + setPieceColor(pieceColor): void
+        + getLost(): boolean
+        + setLost(lost): void
+    }
+
+    class Tile {
+        - name: String
+        - price: int
+        - houseCost: int
+        - tax: int
+        - numberOfHouses: int
+        - owner: Player
+        - tileColor: Color
+        - purchasable: boolean
+        - housePurchasable: boolean
+        - sell: int
+        - playersOnTile: List<Player>
+        + Tile(name, price, houseCost, tax, numberOfHouses, color, purchasable, housePurchasable)
+        + getName(): String
+        + getPrice(): int
+        + getHouseCost(): int
+        + getTax(): int
+        + setTax(tax): void
+        + getNumberOfHouses(): int
+        + setNumberOfHouses(numberOfHouses): void
+        + getTileColor(): Color
+        + getPurchasable(): boolean
+        + setPurchasable(result): void
+        + getHousePurchasable(): boolean
+        + setHousePurchasable(result): void
+        + getOwner(): Player
+        + setOwner(owner): void
+        + addPlayer(player): void
+        + removePlayer(player): void
+        + getPlayers(): List<Player>
+        + getSellValue(): int
+        + setSellValue(sell): void
+    }
+
+    class Dice {
+        - random: Random
+        + Dice()
+        + roll(): int
+    }
+
+    class Bonus {
+        - bonus: String
+        - money: int
+        - profitType: int
+        + Bonus(bonus, money, profitType)
+        + getBonus(): String
+        + getMoney(): int
+        + getProfitType(): int
+    }
+
+    class GameLogic {
+        - players: List<Player>
+        - tiles: List<Tile>
+        - bonusTiles: List<Bonus>
+        - random: Random
+        - dice: List<Dice>
+        - selectedTilePosition: int
+        - boardSize: int
+        - turn: int
+        - currentPlayer: Player
+        + GameLogic(players, tiles, bonusTiles, dice, boardSize, currentPlayer, turn)
+        + getBoardSize(): int
+        + selectTile(i): void
+        + getSelectedTile(): Tile
+        + getPlayers(): List<Player>
+        + getTiles(): List<Tile>
+        + getCurrentPlayer(): Player
+        + diceThrow(): List<Integer>
+        + movePlayer(numberOfTiles): String
+        + determineWinner(): Player
+        + newTurn(): void
+        + nextPlayer(): void
+        + getCurrentPlayerNetWorth(): int
+        + currentPlayerLost(): Player
+        + saveGame(filename, thrown): void
+        + currentPlayerHasAllTilesOfColorGroup(color): boolean
+        + isTradable(tile): boolean
+        + playerBought(): void
+        + getHouseCostForAllHouses(tile): int
+        + playerBoughtHouse(): void
+        + playerSold(): void
+    }
+}
+
+package "com.example.gui" {
+    class Board {
+        - players: List<Player>
+        - tileButtons: List<JButton>
+        - tiles: List<Tile>
+        - throwButton: JButton
+        - diceResult: JTextField
+        - passButton: JButton
+        - menuBar: JMenuBar
+        - menu: JMenu
+        - save: JMenuItem
+        - gameIcon: ImageIcon
+        - buyButton: JButton
+        - housButton: JButton
+        - sellButton: JButton
+        - tradeButton: JButton
+        - playersPanel: JPanel
+        - playerAreas: List<JTextArea>
+        - infos: JPanel
+        - tileInfo: JTextArea
+        - thrown: boolean
+        + Board(players, tiles)
+        + isThrown(): boolean
+        + getTiles(): List<Tile>
+        + setTiles(tiles): void
+        + setThrown(thrown): void
+        + getPlayers(): List<Player>
+        + getTileButtons(): List<JButton>
+        + getThrown(): boolean
+        + disableThrowButton(): void
+        + enableThrowButton(): void
+        + disablePassButton(): void
+        + enablePassButton(): void
+        + disableBuyButton(): void
+        + enableBuyButton(): void
+        + disableHouseButton(): void
+        + enableHouseButton(): void
+        + disableSellButton(): void
+        + enableSellButton(): void
+        + disableTradeButton(): void
+        + enableTradeButton(): void
+        + repaintAllTiles(): void
+        + refreshPlayerPanels(players): void
+        + refreshHouseCount(tile): void
+        + highlightCurrentPlayer(currentPlayer, players): void
+        + gameOverScreen(): void
+        + playerLost(lostPlayer, currentPlayer, players): void
+        + connectButtons(e): void
+        + updateDiceResult(result): void
+        + showMessage(msg): void
+        + hightLightTile(info, color): void
+        + highlightTileBorder(tile, playerColor, bought): void
+    }
+
+    class TradeWindow {
+        - currentPlayer: Player
+        - tile: Tile
+        - board: Board
+        - frame: JFrame
+        - area: JTextField
+        - confirmButton: JButton
+        + TradeWindow(board, currentPlayer, tile)
+        + actionPerformed(e): void
+    }
+
+    class PlayerIcon {
+        - tile: Tile
+        - size: int
+        + PlayerIcon(tile, size)
+        + paintIcon(c, g, x, y): void
+        + getIconWidth(): int
+        + getIconHeight(): int
+    }
+}
+
+package "com.example.controller" {
+    class Main {
+        {static} players: List<Player>
+        {static} tiles: List<Tile>
+        {static} bonusTiles: List<Bonus>
+        {static} dice: List<Dice>
+        {static} boardSize: int
+        {static} currentPlayer: Player
+        {static} turn: int
+        {static} thrown: boolean
+        + Main()
+        + {static} main(args): void
+        + {static} setup(): boolean
+    }
+
+    class GameController {
+        - gameLogic: GameLogic
+        - board: Board
+        - thrown: boolean
+        + GameController(gameLogic, board, thrown)
+        + startGame(): void
+        + movePlayer(numberOfTiles): void
+        + newTurn(): void
+        + handlePassButton(): void
+        + handleTileButton(tileIndex): void
+        + actionPerformed(e): void
+    }
+
+    class Setup {
+        + Setup()
+        + load(players, tiles, bonusTiles): int[]
+        + newGame(players, tiles, bonusTiles): void
+        + loadFromFile(players, tiles, bonusTiles, filename): int[]
+    }
+}
+
+package "com.example.exception" {
+    class PlayerWon {
+        + PlayerWon(message)
+    }
+
+    class EndGame {
+        + EndGame(message)
+    }
+}
+
+' Inheritance relationships
+PlayerWon --|> Exception
+EndGame --|> Exception
+Board --|> JFrame
+TradeWindow ..|> ActionListener
+GameController ..|> ActionListener
+PlayerIcon ..|> Icon
+Player ..|> Serializable
+Tile ..|> Serializable
+Dice ..|> Serializable
+Bonus ..|> Serializable
+
+' Composition and Association relationships
+Player "1" *-- "*" Tile : owns
+Tile "1" o-- "*" Player : playersOnTile
+Tile "*" --> "1" Player : owner
+GameLogic "1" *-- "*" Player : manages
+GameLogic "1" *-- "*" Tile : manages
+GameLogic "1" *-- "*" Bonus : uses
+GameLogic "1" *-- "2" Dice : uses
+GameLogic --> Player : currentPlayer
+
+Board "1" o-- "*" Player : displays
+Board "1" o-- "*" Tile : displays
+
+GameController "1" --> "1" GameLogic : controls
+GameController "1" --> "1" Board : updates
+
+TradeWindow --> Board : updates
+TradeWindow --> Player : currentPlayer
+TradeWindow --> Tile : trades
+
+PlayerIcon --> Tile : displays
+
+Main ..> Setup : uses
+Main ..> GameLogic : creates
+Main ..> Board : creates
+Main ..> GameController : creates
+
+Setup ..> Player : creates
+Setup ..> Tile : loads
+Setup ..> Bonus : loads
+Setup ..> EndGame : throws
+
+GameLogic ..> PlayerWon : throws
+
+note right of GameLogic
+  The brain of the game
+  Handles all game logic
+end note
+
+note right of GameController
+  MVC Controller
+  Connects GUI with GameLogic
+end note
+
+note right of Board
+  Main GUI window
+  Displays the game board
+end note
+
+@enduml
