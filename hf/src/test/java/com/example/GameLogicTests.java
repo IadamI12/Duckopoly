@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.example.logic.Bonus;
-import com.example.logic.Dice;
+import com.example.data.Bonus;
+import com.example.data.Dice;
+import com.example.data.Player;
+import com.example.data.Tile;
 import com.example.logic.GameLogic;
-import com.example.logic.Player;
-import com.example.logic.Tile;
 
 import java.awt. Color;
 import java.util.ArrayList;

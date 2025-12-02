@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.controller"},{"l":"com.example.exception"},{"l":"com.example.gui"},{"l":"com.example.logic"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.controller"},{"l":"com.example.data"},{"l":"com.example.exception"},{"l":"com.example.gui"},{"l":"com.example.logic"}];updateSearchResults();

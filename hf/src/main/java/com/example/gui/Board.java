@@ -16,8 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
-import com.example.logic.Player;
-import com.example.logic.Tile;
+import com.example.data.Player;
+import com.example.data.Tile;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -298,7 +298,6 @@ public class Board extends JFrame {
         this.setTitle("Duckopoly");
         String filename = "hf\\src\\main\\resources\\duck.png";
         String filePath = filename.replace("\\", File.separator);
-        ImageIcon icon = new ImageIcon(filePath);
         gameIcon = new ImageIcon(filePath);
         this.setIconImage(gameIcon.getImage());
         menuBar = new JMenuBar();

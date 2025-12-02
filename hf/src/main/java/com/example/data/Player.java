@@ -1,6 +1,8 @@
-package com.example.logic;
+package com.example.data;
 
 import java.util.List;
+
+
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;

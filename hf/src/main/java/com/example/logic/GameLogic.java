@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.example.data.Bonus;
+import com.example.data.Dice;
+import com.example.data.Player;
+import com.example.data.Tile;
 import com.example.exception.PlayerWon;
 
 /**

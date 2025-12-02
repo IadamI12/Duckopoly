@@ -10,8 +10,8 @@ import java.util.List;
 
 import javax.swing.Icon;
 
-import com.example.logic.Player;
-import com.example.logic.Tile;
+import com.example.data.Player;
+import com.example.data.Tile;
 
 /**
  * A class to store the icon's corresponding to the players of the game

@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
+import com.example.data.Bonus;
+import com.example.data.Player;
+import com.example.data.Tile;
 import com.example.exception.EndGame;
-import com.example.logic.Bonus;
-import com.example.logic.Player;
-import com.example.logic.Tile;
 
 import java.io.File;
 

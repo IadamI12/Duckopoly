@@ -9,12 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import com.example.data.Player;
+import com.example.data.Tile;
 import com.example.exception.PlayerWon;
 import com.example.gui.Board;
 import com.example.gui.TradeWindow;
 import com.example.logic.GameLogic;
-import com.example.logic.Player;
-import com.example.logic.Tile;
 
 /**
  * A class to connect the GUI with the game logic

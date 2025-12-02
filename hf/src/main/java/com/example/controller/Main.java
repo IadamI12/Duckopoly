@@ -3,13 +3,13 @@ package com.example.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.data.Bonus;
+import com.example.data.Dice;
+import com.example.data.Player;
+import com.example.data.Tile;
 import com.example.exception.EndGame;
 import com.example.gui.Board;
-import com.example.logic.Bonus;
-import com.example.logic.Dice;
 import com.example.logic.GameLogic;
-import com.example.logic.Player;
-import com.example.logic.Tile;
 
 /**
  * The main class to start the game

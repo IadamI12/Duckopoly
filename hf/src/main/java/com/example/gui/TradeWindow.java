@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import com.example.logic.Player;
-import com.example.logic.Tile;
+import com.example.data.Player;
+import com.example.data.Tile;
 /**
  * A class handling the trading
  * 
